@@ -1,0 +1,20 @@
+name: Check completed version
+on:
+  push:
+    branches: [ completed ]
+  pull_request:
+    branches: [ completed ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Lints
+        run: make lint
+      - name: Tests
+        run: make test
